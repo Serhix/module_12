@@ -1,9 +1,13 @@
 from collections import UserDict
 from datetime import datetime
+import pickle
 
 
 class AddressBook(UserDict):    # Наслідується від UserDict, словник з полями name, phone....
-  
+    def __init__(self):
+        super().__init__()
+        self.load_from_file()
+
     def add_record(self, record):
         self.data[record.name.value] = record
 
@@ -25,6 +29,17 @@ class AddressBook(UserDict):    # Наслідується від UserDict, сл
                 iter_index = 0
         if data_output:
             yield data_output
+    
+    def save_to_file(self):
+        with open('address_book.dat', 'wb') as file:
+            pickle.dump(self.data, file)
+
+    def load_from_file(self):
+        try:   
+            with open('address_book.dat', 'rb') as file:
+                self.data = pickle.load(file)
+        except:
+            print('New contact book is created')
 
         
         
@@ -128,3 +143,4 @@ class Birthday(Field):             # Необов'язкове поле з дн�
         if birthday_date.year > 1900 and birthday_date <= datetime.now():
             self.__value = new_value
 
+address_book = AddressBook()

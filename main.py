@@ -1,8 +1,5 @@
 from instructions_func import choise_comand
-from instructions_func import address_book
-import pickle
-
-
+from classes import address_book
 
 def main():
 
@@ -14,8 +11,7 @@ def main():
             if result == 'Good bye!':
                 break
     finally:    
-        with open('address_book.dat', 'wb') as file:
-            pickle.dump(address_book, file)
+        address_book.save_to_file()
 
 
 if __name__ == '__main__':

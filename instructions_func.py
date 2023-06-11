@@ -1,6 +1,4 @@
-from classes import AddressBook, Record, Name, Phone, Birthday
-import pickle
-
+from classes import Record, Name, Phone, Birthday, address_book
 
 def input_error(func):
     
@@ -148,8 +146,3 @@ def choise_comand(request):
         return COMANDS.get(comand, incorrect_input)(data)
     return COMANDS.get(comand, incorrect_input)()
 
-try:   
-    with open('address_book.dat', 'rb') as file:
-        address_book = pickle.load(file)
-except:
-    address_book = AddressBook()
